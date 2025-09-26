@@ -16,16 +16,11 @@ func uniq(a []int, b []int) ([]int, []int) {
 	return helper([]int{a[0]}, a), helper([]int{b[0]}, b)
 }
 
-func helper(result []int, a []int) []int {
-	for _, v := range a[1:] {
-		dup := false
-		for _, v1 := range result {
-			if v == v1 {
-				dup = true
-				break
-			}
-		}
-		if !dup {
+func helper(result []int, x []int) []int {
+	seen := map[int]bool{result[0]: true}
+	for _, v := range x[1:] {
+		if !seen[v] {
+			seen[v] = true
 			result = append(result, v)
 		}
 	}
